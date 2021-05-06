@@ -4,7 +4,8 @@
   "description": "Hack Reactor SDC",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "server-dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",

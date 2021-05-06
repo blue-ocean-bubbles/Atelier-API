@@ -1,20 +1,22 @@
 const express = require('express');
-const api = require('/db');
-const config = require('config.js');
-const { port }
+const db = require('./db/db.js');
+const { port } = require('./config/config.js');
 
 const app = express();
 
-app.get('/qa/questions', (req, res) => {
-
+app.get('/qa/questions/:product_id', (req, res) => {
+  const id = req.params.product_id;
+  console.log(`serving GET request to /qa/questions/${id}`);
+  utils.getQuestionList(id)
+    .then((questionList) => {
+      res.json(questionList);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.end();
+    });
 });
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 })
-
-/******
- *
- *  WORK IN PROGRESS
- *
- ******/
