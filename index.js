@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./db/db.js');
+const api = require('./db/api.js');
 const { port } = require('./config/config.js');
 
 const app = express();
@@ -7,7 +8,7 @@ const app = express();
 app.get('/qa/questions/:product_id', (req, res) => {
   const id = req.params.product_id;
   console.log(`serving GET request to /qa/questions/${id}`);
-  utils.getQuestionList(id)
+  api.getQuestionList(id)
     .then((questionList) => {
       res.json(questionList);
     })
