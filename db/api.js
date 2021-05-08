@@ -36,12 +36,23 @@ formatQuestionList = (questions, answers, photos) => {
   for (let i = 0; i < answers.length; i++) {
     for (let j = 0; j < answers[i].length; j++) {
       answers[i][j].photos = photos[j].map(photo => photo.url);
-      // answerTemplate[answers[i][j].id] = answers[i][j];
-      // answers[i][j] = answerTemplate;
+      answerTemplate[answers[i][j].id] = answers[i][j];
     }
+    answers[i] = answerTemplate;
+    answerTemplate = {};
   }
 
-  console.log(answers);
+  for (let i = 0; i < questions.length; i++) {
+    questions[i].answers = answers[i];
+  }
+
+  return questions;
 }
 
-module.exports.getQuestionList(1);
+// module.exports.getQuestionList(1)
+//   .then(res => {
+//     console.log(res);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
