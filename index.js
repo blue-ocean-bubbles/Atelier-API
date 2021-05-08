@@ -11,7 +11,6 @@ app.get('/qa/questions/:product_id', async (req, res) => {
   console.log(api.getQuestionList(id))
   api.getQuestionList(id)
     .then((questionList) => {
-      console.log(questionList);
       res.json(questionList);
     })
     .catch((err) => {
