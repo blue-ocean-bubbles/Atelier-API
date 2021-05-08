@@ -4,6 +4,8 @@ const api = require('./db/api.js');
 const { port } = require('./config/config.js');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/qa/questions/:product_id', async (req, res) => {
   const id = req.params.product_id;

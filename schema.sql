@@ -10,7 +10,7 @@ CREATE TABLE "questions" (
 	"asker_name" varchar(60) NOT NULL,
 	"asker_email" varchar(60) NOT NULL,
 	"reported" BOOLEAN NOT NULL DEFAULT 'false',
-	"helpful" int NOT NULL,
+	"helpful" int NOT NULL DEFAULT 0,
 	CONSTRAINT "questions_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -24,7 +24,7 @@ CREATE TABLE "answers" (
 	"answerer_name" varchar(60) NOT NULL,
 	"answerer_email" varchar(60) NOT NULL,
 	"reported" BOOLEAN NOT NULL DEFAULT 'false',
-	"helpful" int NOT NULL,
+	"helpful" int NOT NULL DEFAULT 0,
 	CONSTRAINT "answers_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE

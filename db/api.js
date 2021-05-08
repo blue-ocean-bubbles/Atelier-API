@@ -38,15 +38,22 @@ module.exports.getQuestionList = (productId) => {
   });
 }
 
-// module.exports.addQuestion = (form) => {
-//   const { body, name, email } = form;
-//   const id = parseInt(form.product_id);
+module.exports.addQuestion = (form) => {
+  const { body, name, email } = form;
+  const id = parseInt(form.product_id);
+  const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  console.log(typeof body);
 
-//   return new Promise((resolve, reject) => {
-//     // HERE HERE HERE
-//     sequelize.query(`INSERT INTO questions ...`)
-//   });
-// };
+  // return new Promise((resolve, reject) => {
+  return sequelize.query(
+      `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, helpful)
+      VALUES (${id}, '${body}', '${date}', '${name}', '${email}', 0)`
+    )
+    .catch((err) => {
+      console.log(err);
+    });
+  //});
+};
 
 formatQuestionList = (questions, answers, photos, productId) => {
   let answerTemplate = {};
