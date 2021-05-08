@@ -8,13 +8,24 @@ const app = express();
 app.get('/qa/questions/:product_id', async (req, res) => {
   const id = req.params.product_id;
   console.log(`serving GET request to /qa/questions/${id}`);
-  console.log(api.getQuestionList(id))
   api.getQuestionList(id)
     .then((questionList) => {
       res.json(questionList);
     })
     .catch((err) => {
       console.log(err);
+      res.end();
+    });
+});
+
+app.post('/qa/questions', (req, res) => {
+  console.log('serving POST request to /qa/questions');
+  api.addQuestion(req.body)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(err.message);
       res.end();
     });
 });
