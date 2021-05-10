@@ -71,7 +71,43 @@ module.exports.addAnswer = (questionId, form) => {
     .catch((err) => {
       console.log(err);
     });
-}
+};
+
+module.exports.markQuestionHelpful = (questionId) => {
+  return sequelize.query(
+    `UPDATE questions SET helpful = helpful + 1 WHERE id = ${questionId}`
+  )
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.markAnswerHelpful = (answerId) => {
+  return sequelize.query(
+    `UPDATE answers SET helpful = helpful + 1 WHERE id = ${answerId}`
+  )
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.reportQuestion = (questionId) => {
+  return sequelize.query(
+    `UPDATE questions SET reported = true WHERE id = ${questionId}`
+  )
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.reportAnswer = (answerId) => {
+  return sequelize.query(
+    `UPDATE answers SET reported = true WHERE id = ${answerId}`
+  )
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 formatQuestionList = (questions, answers, photos, productId) => {
   let answerTemplate = {};
@@ -93,4 +129,4 @@ formatQuestionList = (questions, answers, photos, productId) => {
     'product_id': productId,
     'results': questions
   };
-}
+};
