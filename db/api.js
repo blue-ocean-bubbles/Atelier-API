@@ -36,7 +36,7 @@ module.exports.getQuestionList = (productId) => {
       console.log(err);
     });
   });
-}
+};
 
 module.exports.addQuestion = (form) => {
   const { body, name, email } = form;
@@ -44,13 +44,34 @@ module.exports.addQuestion = (form) => {
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
   return sequelize.query(
-      `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, helpful)
-      VALUES (${id}, '${body}', '${date}', '${name}', '${email}', 0)`
+    `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, helpful)
+    VALUES (${id}, '${body}', '${date}', '${name}', '${email}', 0)`
   )
     .catch((err) => {
       console.log(err);
     });
 };
+
+module.exports.addAnswer = (questionId, form) => {
+  const { body, name, email, photos } = form;
+  const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  return sequelize.query(
+    `INSERT INTO answers(question_id, body, date_written, answerer_name, answerer_email)
+    VALUES (${questionId}, '${body}', '${date}', '${name}', '${email}')
+    RETURNING id`
+  )
+    .then((answerId) => {
+      const photoQueries = photos.map((url) =>
+        sequelize.query(`INSERT INTO photos(answer_id, url)
+          VALUES (${answerId[0][0].id}, '${url}')`)
+      );
+      return Promise.all(photoQueries);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 formatQuestionList = (questions, answers, photos, productId) => {
   let answerTemplate = {};
@@ -73,11 +94,3 @@ formatQuestionList = (questions, answers, photos, productId) => {
     'results': questions
   };
 }
-
-// module.exports.getQuestionList(1)
-//   .then(res => {
-//     console.log(res);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   })

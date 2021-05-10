@@ -32,6 +32,19 @@ app.post('/qa/questions', (req, res) => {
     });
 });
 
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  const id = req.params.question_id;
+  console.log(`serving POST request to /qa/questions/${id}/answers`);
+  api.addAnswer(id, req.body)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res.end();
+    });
+});
+
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 })
