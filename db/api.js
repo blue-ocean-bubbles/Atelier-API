@@ -31,9 +31,15 @@ module.exports.getQuestionList = (productId) => {
                 resolve(formatQuestionList(questions, answers, photos, productId));
               })
           })
+          .catch((err) => {
+            reject(err);
+          });
       })
+      .catch((err) => {
+        reject(err);
+      });
     .catch((err) => {
-      console.log(err);
+      reject(err);
     });
   });
 };
