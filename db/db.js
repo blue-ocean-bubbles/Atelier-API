@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const { DB_USERNAME, DB_PASSWORD } = require('../config/config.js');
 
 const sequelize = new Sequelize('qna', DB_USERNAME, DB_PASSWORD, {
-  host: 'localhost',
+  host: '172.17.0.2',
   dialect: 'postgres',
   // logging: false
 });
