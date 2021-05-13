@@ -91,6 +91,11 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     });
 });
 
+// verification for loader.io
+app.get('/loaderio-ebf0c6588793bf3b02501b9af46ba8e9/', (req, res) => {
+  res.send('loaderio-ebf0c6588793bf3b02501b9af46ba8e9');
+});
+
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
-})
+});

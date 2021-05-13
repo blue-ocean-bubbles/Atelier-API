@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
-const { DB_USERNAME, DB_PASSWORD } = require('../config/config.js');
+const { DB_USERNAME, DB_PASSWORD, DB_ADDRESS } = require('../config/config.js');
 
 const sequelize = new Sequelize('qna', DB_USERNAME, DB_PASSWORD, {
-  host: '172.17.0.2',
+  host: DB_ADDRESS,
   dialect: 'postgres',
   // logging: false
 });

@@ -19,7 +19,7 @@ module.exports.getQuestionList = (productId) => {
             for (var i = 0; i < answers.length; i++) {
               answers[i] = answers[i][0];
             }
-            flatAnswers = answers.flat();
+            let flatAnswers = answers.flat();
             let photos = flatAnswers.map((answer) =>
               sequelize.query(`SELECT url FROM photos WHERE answer_id = ${answer.id}`)
             );
